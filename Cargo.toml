@@ -1,0 +1,25 @@
+[package]
+name = "theteller-rust"
+version = "0.1.0"
+authors = ["A.E Clarence <clarencecodes@outlook.com>"]
+categories = ["payments", "e-commerce"]
+description = "TheTeller Rust library provides convenient access to the TheTeller API from applications written in Rust."
+documentation = "https://github.com/clarnx/theteller_rust/README.md"
+edition = "2021"
+homepage = "https://github.com/clarnx/theteller_rust"
+keywords = ["theteller", "teller", "checkout", "payment", "pos"]
+license = "MIT OR Apache-2.0"
+readme = "crates-io.md"
+repository = "https://github.com/clarnx/theteller_rust"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+base64 = "0.13.0"
+
+[lib]
+name = "theteller"
+path = "src/lib.rs"
