@@ -1,6 +1,9 @@
-use theteller::{resources, client::r#async};
+use theteller::{
+    client::r#async::{self, Client},
+    resources,
+};
 
 #[tokio::main]
 async fn main() {
-    println!("Hello, world!");
+    let client = Client::new("hello");
 }
