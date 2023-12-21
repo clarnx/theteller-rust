@@ -1,7 +1,7 @@
 pub mod client {
-    pub use crate::client;
+    pub mod r#async;
 }
 
-    pub mod checkout {
-        pub use crate::checkout;
-    }
+pub mod resources {
+    pub mod checkout;
+}

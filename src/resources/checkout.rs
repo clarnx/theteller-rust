@@ -1,7 +1,7 @@
 use serde::Serialize;
 
-#[derive(Clone, Debug, Serialize, Default)]
-pub struct Checkout {
+#[derive(Debug, Serialize, Default)]
+pub struct CheckoutPayload {
     merchant_id: &'static str,
     transaction_id: &'static str,
     desc: &'static str,
@@ -12,4 +12,12 @@ pub struct Checkout {
     apiuser: &'static str,
 }
 
-impl Checkout {}
+impl CheckoutPayload {}
+
+pub struct Checkout;
+
+impl Checkout {
+    fn initiate(url: &str, request_payload: CheckoutPayload) {
+        // let request_client = clien;
+    }
+}
