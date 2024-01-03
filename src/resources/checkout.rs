@@ -1,44 +1,37 @@
-use reqwest::Client;
+use reqwest::{Client, Error, Response};
 use serde::Serialize;
 
-use crate::traits::create_request_payload::CreateRequestPayload;
+use crate::constants::endpoints::CHECKOUT_ENDPOINT;
 
 #[derive(Debug, Serialize, Default)]
-pub struct CheckoutPayload {
-    merchant_id: &'static str,
-    transaction_id: &'static str,
-    desc: &'static str,
-    amount: &'static str,
-    #[serde(skip_serializing_if = "str::is_empty")]
-    redirect_url: &'static str,
-    email: &'static str,
-    #[serde(skip_serializing_if = "str::is_empty")]
-    api_key: &'static str,
-    #[serde(skip_serializing_if = "str::is_empty")]
-    apiuser: &'static str,
+pub struct Checkout {
+    pub merchant_id: String,
+    pub transaction_id: String,
+    pub desc: String,
+    pub amount: String,
+    pub redirect_url: String,
+    pub email: String,
 }
-
-impl CheckoutPayload {}
-
-impl CreateRequestPayload for CheckoutPayload {
-    fn new() -> Self {
-        Self {
-            merchant_id: "",
-            transaction_id: "",
-            desc: "",
-            amount: "",
-            redirect_url: "",
-            email: "",
-            api_key: "",
-            apiuser: "",
-        }
-    }
-}
-
-pub struct Checkout;
 
 impl Checkout {
-    fn initiate(client: &Client, request_payload: impl CreateRequestPayload) {
-        // client.
+    fn new() -> Self {
+        Self {
+            merchant_id: "".to_string(),
+            transaction_id: "".to_string(),
+            desc: "".to_string(),
+            amount: "".to_string(),
+            redirect_url: "".to_string(),
+            email: "".to_string(),
+        }
+    }
+
+    pub async fn initiate(&self, client: &Client) -> Result<Response, Error> {
+        let response = client
+            .post(format!("{}/initiate", CHECKOUT_ENDPOINT))
+            .json(self)
+            .send()
+            .await;
+
+        response
     }
 }
